@@ -1,0 +1,27 @@
+<% if products.empty? %>
+  <%= t(:no_products_found) %>
+<% elsif params.key?(:keywords) %>
+  <h3><%= t(:search_results, :keywords => h(params[:keywords])) %></h3>
+<% end %>
+
+<% if products.any? %>
+<ul id="products" class="product-listing" data-hook>
+  <% products.each do |product| %>
+    <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+      <li id="product_<%= product.id %>" data-hook="products_list_item">
+        <%= link_to product.name, product, :class => 'info' %>
+        <%= link_to small_image(product), product %>
+        <span class="price selling"><%= product_price(product) %></span>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<% end %>
+
+<hr class="space" />
+
+<% if products.respond_to?(:num_pages)
+      params.delete(:search)
+      params.delete(:taxon)
+%><%= paginate products %><% end %>
+<hr class="space" />

@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-<div data-hook="homepage_sidebar_navigation">
+<div data-hook="total_sold_sidebar_navigation">
 	<%= render 'shared/taxonomies' %>
 </div>
 <% end %>
 
-<div data-hook="homepage_products">
-	<%= render 'shared/products', :products => @products %>
+<div data-hook="total_sold_products">
+	<%= render 'shared/products_favorites', :products => @products %>
 </div>
